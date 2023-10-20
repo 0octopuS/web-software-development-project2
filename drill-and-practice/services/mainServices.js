@@ -25,6 +25,7 @@ const alterTable = async () => {
         FOREIGN KEY (question_answer_option_id) REFERENCES question_answer_options ON DELETE CASCADE;`;
 };
 const getStatistics = async () => {
+  console.log('Enter index page, show statistics');
   return await sql`SELECT
         (SELECT COUNT(*) FROM topics) AS topicCount,
         (SELECT COUNT(*) FROM questions) AS questionCount,
