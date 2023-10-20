@@ -26,6 +26,8 @@ const alterTable = async () => {
 };
 const getStatistics = async () => {
   console.log('Enter index page, show statistics');
+  const dbenv = Deno.env.get('DATABASE_URL');
+  console.log(dbenv);
   return await sql`SELECT
         (SELECT COUNT(*) FROM topics) AS topicCount,
         (SELECT COUNT(*) FROM questions) AS questionCount,
