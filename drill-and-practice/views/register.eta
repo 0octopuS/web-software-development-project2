@@ -15,9 +15,9 @@
 <form method="POST" action="/auth/register">
 <div class="form-group">
   Email:<br/>
-  <input class="form-check-input" type="email" name="email" value="<%= it.email %>" /> <br/>
+  <input class="form-control" type="email" name="email" value="<%= it.email %>" /> <br/>
   Password:<br/>
-  <input class="form-check-input" type="password" name="password" /><br/>
+  <input class="form-control" type="password" name="password" /><br/>
   <button class="btn btn-primary" type="submit" value="Submit!"> Submit!</button>
 </div>
 </form>
