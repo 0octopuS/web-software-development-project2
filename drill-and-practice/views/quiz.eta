@@ -1,0 +1,24 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1><%= it.title %></h1>
+<% if(it.answerOptions && it.answerOptions.length !== 0) {%>
+<h2>Question Text:</h2>
+<p><%= it.questionText %></p>
+
+<h2>Answer Options:</h2>
+<ul class="list-group">
+  <% it.answerOptions.forEach(option => { %>
+  <form method="post" action="/quiz/<%= it.topicId %>/questions/<%= it.questionId %>/options/<%= option.id%>" >
+  <div class="form-group">
+    <li class="list-group-item">
+      <%= option.option_text %>
+      <button type="submit" name="chosenOption" value="<%= option.id %>">Choose</button>
+    </li>
+    </div>
+  </form>
+  <% }); %>
+</ul>
+<%} else {%>
+No available options.
+<a href="/quiz/<%= it.topicId %>" class="card-link">Next question</a>
+<%};%>

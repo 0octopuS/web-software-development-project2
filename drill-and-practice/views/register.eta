@@ -1,0 +1,24 @@
+<% layout("./layouts/layout.eta") %>
+
+
+<% if (it.validationError) { %>
+<ul class="list-group">
+    <% Object.keys(it.validationError).forEach((attribute) => { %>
+        <% Object.values(it.validationError[attribute]).forEach((err) => { %>
+            <li class="list-group-item"><%= err %></li>
+        <% }); %>
+    <% }); %>
+</ul>
+<% } %>
+
+<h1>Register!</h1>
+<form method="POST" action="/auth/register">
+<div class="form-group">
+  Email:<br/>
+  <input class="form-check-input" type="email" name="email" value="<%= it.email %>" /> <br/>
+  Password:<br/>
+  <input class="form-check-input" type="password" name="password" /><br/>
+  <button class="btn btn-primary" type="submit" value="Submit!"> Submit!</button>
+</div>
+</form>
+<p>Already registered? <a href="/auth/login" class="card-link">Login here!</a></p>

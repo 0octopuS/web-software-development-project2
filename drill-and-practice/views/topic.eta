@@ -1,0 +1,34 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1><%= it.topic.name %></h1>
+
+<% if (it.validationError) { %>
+<ul class="list-group">
+    <% Object.keys(it.validationError).forEach((attribute) => { %>
+        <% Object.values(it.validationError[attribute]).forEach((err) => { %>
+            <li class="list-group-item"><%= err %></li>
+        <% }); %>
+    <% }); %>
+</ul>
+<% } %>
+
+<form action="/topics/<%= it.topic.id %>/questions" method="post">
+<div class="form-group">
+  <label for="question_text">Question Text:</label>
+  <textarea class="form-control" name="question_text" id="question_text" rows="4" cols="50" required></textarea>
+  <br>
+  <button type="submit" class="btn btn-primary">Submit Question</button>
+</div>
+</form>
+
+
+
+<!-- List of questions -->
+<ul class="list-group">
+  <% it.questions.forEach(question => { %>
+    <li class="list-group-item">
+      <a href="/topics/<%= it.topic.id %>/questions/<%= question.id %>" class="card-link"><%= question.question_text %></a>
+    </li>
+  <% }); %>
+</ul>
+

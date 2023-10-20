@@ -1,0 +1,43 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1> topic </h1>
+
+<% if (it.topics && it.topics.length > 0) { %>
+
+<ul class='topic-list'>
+<% it.topics.forEach(topic => { %>
+  <li class="list-group-item" > 
+    <a href="/topics/<%= topic.id %>" class ='topic-link'> <%= topic.name %> </a>
+      <% if(it.admin === true){ %>
+        <form action='/topics/<%= topic.id %>/delete' method='post' id='delete-topic-form'>
+          <button class="btn btn-primary btn-sm" type="submit">Delete</button>  
+        </form>
+      <%}%>
+  </li>
+<% }); %>
+</ul>
+<% } else { %>
+<p>None available.</p>
+<% } %>
+
+
+<% /* Only Admin */ %>
+ <% if(it.admin === true ){ %>
+<form action="/topics" method="post" id="add-topic-form">
+  <label for="name">Topic Name:</label>
+  <input  class="form-control" type="text" name="name" id="name" required>
+  <br>
+  <button class="btn btn-primary" type="submit" id="addTopic">Submit Topic</button>
+</div>
+<%}%>
+
+
+<% if (it.validationError) { %>
+<ul class="list-group">
+    <% Object.keys(it.validationError).forEach((attribute) => { %>
+        <% Object.values(it.validationError[attribute]).forEach((err) => { %>
+            <li class="list-group-item"><%= err %></li>
+        <% }); %>
+    <% }); %>
+</ul>
+<% } %>

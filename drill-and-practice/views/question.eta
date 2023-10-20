@@ -1,0 +1,44 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1>Topic <%= it.topicId %>, Question <%= it.question.id %></h1>
+
+<h2>Question Text:</h2>
+<p><%= it.question.question_text %></p>
+
+<% if(it.answerOptions.length > 0){%>
+<h2>Answer Options:</h2>
+<ul class="list-group">
+  <% it.answerOptions.forEach(option => { %>
+    <li class="list-group-item">
+      <%= option.option_text %>
+      <% if (option.is_correct) { %>
+        (Correct)
+      <% } %>
+      <form action='/topics/<%= it.topicId %>/questions/<%= it.question.id %>/options/<%= option.id %>/delete' method='post'>
+       <div class="form-group">
+      <button class="btn btn-primary btn-sm" type="submit"> Delete option</button>
+      </div>
+      </form>
+    </li>
+  <% }); %>
+</ul>
+<% } else {%>
+  <form action='/topics/<%= it.topicId %>/questions/<%= it.question.id %>/delete' method='post'>
+  <div class="form-group">
+      <button class="btn btn-primary btn-sm" type="submit"> Delete question</button>
+      </div>
+      </form>
+<%};%>
+
+<h2>Add Answer Option:</h2>
+<form action="/topics/<%= it.topicId %>/questions/<%= it.question.id %>/options" method="post" id='answer-option-form'>
+<div class="form-group">
+  <label for="option_text">Option Text:</label>
+  <textarea class="form-control" name="option_text" id="option_text" required></textarea>
+  <br>
+  <label for="is_correct">Correct Answer:</label>
+  <input class="form-check-input"type="checkbox" name="is_correct">
+  <br>
+  <button class="btn btn-primary" type="submit">Add Answer Option</button>
+</div>
+</form>
